@@ -4,7 +4,7 @@ function Spinner() {
 
     return (
         <div className="spinner_wrapper">
-            <span className="spinner_content">Spinner</span>           
+            <span className="spinner_content" />           
         </div>
     )
 }

@@ -1,8 +1,8 @@
 import type { ComponentPropsWithoutRef } from "react";
-import './Card.css';
 import type { Store } from "../types";
 import Badge from "./Badge";
 import SecretText from "./SecretText";
+import './StoreCard.css';
 
 type CardProps = ComponentPropsWithoutRef<"div"> & {
     store: Store;
