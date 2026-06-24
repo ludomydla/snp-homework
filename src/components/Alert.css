@@ -1,0 +1,5 @@
+.alert {
+    border: 1px solid red;
+    background: rgba(255, 0, 0, 0.3);
+    color: #911;
+}

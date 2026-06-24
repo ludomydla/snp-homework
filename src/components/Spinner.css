@@ -1,0 +1,21 @@
+.spinner_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+.spinner_content {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    border-radius: 50%;
+    border: 3px solid blue;
+    border-top-left-radius: 3px solid #99f;
+    animation: spin 3s ease-in-out;
+}
