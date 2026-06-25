@@ -16,10 +16,20 @@ function Card({store, onDelete, onEdit}: CardProps) {
     return (
         <div className="storeCard">
             <h3>{store.name}</h3>
-            <p>{store.description}</p>
-            <Badge content={store.type} />
-            <p>{store.url}</p>
-            <SecretText text={store.secretKey} />
+            <div className="storeCard_grid">
+                <b>Description: </b>
+                <p>{store.description}</p>
+                <b>Store type: </b>
+                <Badge content={store.type} />
+                <b>Url: </b>
+                <p>{store.url}</p>
+                <b>Secret key: </b>
+                <SecretText text={store.secretKey} />
+            </div>
+            
+            
+            
+            
             <div className="storeCard_footer">
                 <Button variant="secondary" onClick={() => onEdit(store)}>Edit</Button>
                 <Button variant="danger" onClick={onDelete}>Delete</Button>

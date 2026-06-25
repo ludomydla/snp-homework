@@ -7,6 +7,17 @@
     align-items: start;
 }
 
+.storeCard_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+}
+
+.storeCard_grid > * {
+    justify-self: start;
+    text-align: left;
+}
+
 .storeCard_footer {
     width: 100%;
     display: flex;
