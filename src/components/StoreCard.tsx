@@ -2,6 +2,7 @@ import type { ComponentPropsWithoutRef } from "react";
 import type { Store } from "../types";
 import Badge from "./Badge";
 import SecretText from "./SecretText";
+import Button from "./Button";
 import './StoreCard.css';
 
 type CardProps = ComponentPropsWithoutRef<"div"> & {
@@ -18,6 +19,10 @@ function Card({store}: CardProps) {
             <Badge content={store.type} />
             <p>{store.url}</p>
             <SecretText text={store.secretKey} />
+            <div className="storeCard_footer">
+                <Button variant="secondary">Edit</Button>
+                <Button variant="danger">Delete</Button>
+            </div>
         </div>
     )
 }
