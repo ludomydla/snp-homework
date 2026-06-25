@@ -7,17 +7,17 @@ export const usePostStore = () => {
     const [error, setError] = useState<string>('');
 
     const postStore = useCallback((newStore: Store) => {
-        setIsLoading(true);
         setError('');
 
         return new Promise<void>((resolve, reject) => {
             const waitTime = Math.random() * 800;
             const errorProbability = 0.1;
+            setIsLoading(true);
 
             setTimeout(() => {
                 setIsLoading(false);
                 if (Math.random() < errorProbability) {
-                    setError('Something went wrong');
+                    setError('Something went wrong when creating new store');
                     reject(error);
                 } else {
                     addStore(newStore);

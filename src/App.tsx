@@ -11,6 +11,7 @@ import { INITIAL_STORE, STORE_TYPE_OPTIONS } from './constants';
 import Input from './components/UI/Input/Input';
 import Select from './components/UI/Select/Select';
 import { usePostStore } from './hooks/usePostStore';
+import { useDeleteStore } from './hooks/useDeleteStore';
 import './App.css'
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const { data, isLoading, error } = useFetchStoreData();
   const { postStore, isLoading: isSaving, error: saveError } = usePostStore();
+  const { deleteStore, isLoading: isDeleting, error: deleteError } = useDeleteStore();
+
+  console.log('loadings', isLoading, isSaving, isDeleting);
 
   const handleClearNewStore = () => {
     setNewStore(INITIAL_STORE);
@@ -38,18 +42,18 @@ function App() {
   return (
     <main>
       <h1>Stores</h1>
-      {isLoading && <Spinner />}
-      {error && (
+      {(isLoading || isSaving || isDeleting) && <Spinner />}
+      {(error || saveError || deleteError) && (
         <Alert message={error} />
       )}
-      {!isLoading && data && (
+      {!isLoading && !isSaving && !isDeleting && data && (
         <div className="grid">
           <AddNewStoreCard onClick={() => setShowModal(true)}>
             <span>➕</span>
             <span>Add store</span>
           </AddNewStoreCard>
           {data.map((store, indx)=> (
-            <StoreCard store={store} key={indx}/>
+            <StoreCard store={store} key={indx} onDelete={() => deleteStore(store.id)} />
           ))}
           <Modal title={'Add new store'} open={showModal} onClose={() => setShowModal(false)}>
             <form onSubmit={handleSaveNewStore}>

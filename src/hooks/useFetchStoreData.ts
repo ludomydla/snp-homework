@@ -13,7 +13,7 @@ export const useFetchStoreData = () => {
 
         const timer = setTimeout(() => {
             if(Math.random() < errorProbability) {
-                setError('Something went wrong');
+                setError('Something went wrong when fetching stores');
                 setData(null);
             } else {
                 setData(getStore());
