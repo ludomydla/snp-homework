@@ -20,7 +20,7 @@ export const useDeleteStore = () => {
                 setIsLoading(false);
                 if (Math.random() < ERROR_PROBABILITY) {
                     setError('Something went wrong when deleting');
-                    reject(error);
+                    reject();
                 } else {
                     removeStore(id)
                     setError('')

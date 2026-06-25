@@ -18,7 +18,7 @@ export const usePatchStore = () => {
                 setIsLoading(false);
                 if (Math.random() < ERROR_PROBABILITY) {
                     setError('Something went wrong when updating store');
-                    reject(error);
+                    reject();
                 } else {
                     updateStore(newStore);
                     setError('');

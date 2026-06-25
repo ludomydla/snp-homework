@@ -18,7 +18,7 @@ export const usePostStore = () => {
                 setIsLoading(false);
                 if (Math.random() < ERROR_PROBABILITY) {
                     setError('Something went wrong when creating new store');
-                    reject(error);
+                    reject();
                 } else {
                     addStore({...newStore, id: Math.round(Math.random() * 1e5)});
                     setError('');

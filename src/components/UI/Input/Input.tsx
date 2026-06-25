@@ -22,8 +22,7 @@ function Button({label, id, value, onChange, ...rest}: InputProps) {
     return (
         <div className="input_wrapper">
             <label className="input_label" htmlFor={inputId}>{label}</label>
-            <input id={inputId} className="input_input" value={value} onChange={handleChange} {...rest}>
-            </input>
+            <input id={inputId} className="input_input" value={value} onChange={handleChange} {...rest} />
         </div>
     )
 }

@@ -24,9 +24,18 @@ function EditStoreModal({open, store, onClose, onCreate, onEdit}: EditStoreModal
         setActualStore(store);
     }, [store]);
 
+    const handleSubmit = (ev: React.SubmitEvent<HTMLFormElement>) => {
+        ev.preventDefault();
+        if(isCreate) {
+            onCreate(actualStore)
+        } else {
+            onEdit(actualStore);
+        } 
+    }
+
     return(
         <Modal title={'Add new store'} open={open} onClose={onClose}>
-            <form onSubmit={(ev) => { ev.preventDefault(); isCreate ? onCreate(actualStore) : onEdit(actualStore); }}>
+            <form onSubmit={handleSubmit}>
                 <Input
                 label="Name"
                 value={actualStore.name}
