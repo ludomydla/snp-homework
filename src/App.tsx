@@ -9,15 +9,31 @@ import Modal from './components/UI/Modal/Modal';
 import Button from './components/UI/Button/Button';
 import { INITIAL_STORE, STORE_TYPE_OPTIONS } from './constants';
 import Input from './components/UI/Input/Input';
-import './App.css'
 import Select from './components/UI/Select/Select';
-
-
-const MODAL_ID = 'ADD_NEW_STORE';
+import { usePostStore } from './hooks/usePostStore';
+import './App.css'
 
 function App() {
   const [newStore, setNewStore] = useState<Partial<Store>>(INITIAL_STORE);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const { data, isLoading, error } = useFetchStoreData();
+  const { postStore, isLoading: isSaving, error: saveError } = usePostStore();
+
+  const handleClearNewStore = () => {
+    setNewStore(INITIAL_STORE);
+    setShowModal(false);
+  }
+
+  const handleSaveNewStore: React.FormEventHandler<HTMLFormElement> = async (ev) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    try {
+      await postStore(newStore as Store);
+      handleClearNewStore();
+    } catch {
+      // error surfaced via saveError below
+    }
+  }
 
   return (
     <main>
@@ -28,21 +44,23 @@ function App() {
       )}
       {!isLoading && data && (
         <div className="grid">
-          <AddNewStoreCard popoverTarget={MODAL_ID}>
+          <AddNewStoreCard onClick={() => setShowModal(true)}>
             <span>➕</span>
             <span>Add store</span>
           </AddNewStoreCard>
           {data.map((store, indx)=> (
             <StoreCard store={store} key={indx}/>
           ))}
-          <Modal title={'Add new store'} id={MODAL_ID}>
-            <form>
+          <Modal title={'Add new store'} open={showModal} onClose={() => setShowModal(false)}>
+            <form onSubmit={handleSaveNewStore}>
               <Input
                 label="Name"
+                required
                 onChange={(value) => {setNewStore(old => ({...old, name: value}))}}
               />
               <Input 
-                label="Fields description" 
+                label="Fields description"
+                required
                 onChange={(value) => {setNewStore(old => ({...old, description: value}))}}
               />
               <Select 
@@ -53,15 +71,26 @@ function App() {
               <Input
                 label="URL"
                 type="url"
+                required
                 onChange={(value) => {setNewStore(old => ({...old, url: value}))}}
               />
               <Input
                 label="Secret key"
                 type="password"
+                required
                 onChange={(value) => {setNewStore(old => ({...old, secretKey: value}))}}
               />
-              <Button variant="success">Save</Button>
-              <Button variant="danger">Cancel</Button>
+              {saveError && <Alert message={saveError} />}
+              <Button variant="success" type="submit" disabled={isSaving}>
+                {isSaving ? 'Saving…' : 'Save'}
+              </Button>
+              <Button
+                variant="danger"
+                type="button"
+                onClick={handleClearNewStore}
+              >
+                Cancel
+              </Button>
             </form>
           </Modal>
         </div>

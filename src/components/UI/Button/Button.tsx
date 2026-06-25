@@ -6,7 +6,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success';
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> & {
     variant: ButtonVariant;
-    onClick?: () => void;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function Button({children, variant, onClick, ...rest}: ButtonProps) {
