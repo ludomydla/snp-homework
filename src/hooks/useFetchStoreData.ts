@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import type { Store } from "../types";
 import { getStore } from "../mocks/MockStore";
+import { ERROR_PROBABILITY, MAX_DELAY } from "../constants";
 
 export const useFetchStoreData = () => {
     const [data, setData] = useState<Store[] | null>(null);
@@ -8,11 +9,10 @@ export const useFetchStoreData = () => {
     const [error, setError] = useState<string>('');
 
     useEffect( () => {
-        const waitTime = Math.random() * 800;
-        const errorProbability = 0.1;
+        const waitTime = Math.random() * MAX_DELAY;
 
         const timer = setTimeout(() => {
-            if(Math.random() < errorProbability) {
+            if(Math.random() < ERROR_PROBABILITY) {
                 setError('Something went wrong when fetching stores');
                 setData(null);
             } else {

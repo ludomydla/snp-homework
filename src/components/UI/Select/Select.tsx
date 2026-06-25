@@ -5,23 +5,26 @@ export type SelectItem = {value: string, label: string};
 
 type SelectProps = Omit<ComponentPropsWithoutRef<'select'>, 'onChange'> & {
     options: SelectItem[];
+    value: string;
     label: string;
     id?: string;
     onChange: (value: string) => void;
 }
 
-function Select({options, label, id, onChange, ...rest}: SelectProps) {
+function Select({options, value, label, id, onChange, ...rest}: SelectProps) {
 
     const handleChange = (ev: React.ChangeEvent<HTMLSelectElement, HTMLSelectElement>) => {
         onChange(ev.target.value)
     }
 
-    const selectId = id ? id : useId();
+    const generatedId = useId();
+    const selectId = id ?? generatedId;
 
     return (
         <div className="select_wrapper">
             <label className="select_label" htmlFor={selectId}>{label}</label>
-            <select className="select_select" id={selectId} onChange={handleChange} {...rest}>
+            <select className="select_select" id={selectId} value={value} onChange={handleChange} {...rest}>
+                <option value="" disabled>Select {label.toLowerCase()}…</option>
                 {options.map((option, indx) => (
                     <option key={indx} value={option.value}>{option.label}</option>
                 ))}

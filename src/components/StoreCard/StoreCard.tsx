@@ -8,10 +8,10 @@ import './StoreCard.css';
 type CardProps = ComponentPropsWithoutRef<"div"> & {
     store: Store;
     onDelete: () => void;
+    onEdit: (store: Store) => void
 }
 
-function Card({store, onDelete}: CardProps) {
-
+function Card({store, onDelete, onEdit}: CardProps) {
 
     return (
         <div className="storeCard">
@@ -21,7 +21,7 @@ function Card({store, onDelete}: CardProps) {
             <p>{store.url}</p>
             <SecretText text={store.secretKey} />
             <div className="storeCard_footer">
-                <Button variant="secondary">Edit</Button>
+                <Button variant="secondary" onClick={() => onEdit(store)}>Edit</Button>
                 <Button variant="danger" onClick={onDelete}>Delete</Button>
             </div>
         </div>

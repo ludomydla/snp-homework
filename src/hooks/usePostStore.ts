@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react"
 import type { Store } from "../types";
 import { addStore } from "../mocks/MockStore";
+import { ERROR_PROBABILITY, MAX_DELAY } from "../constants";
 
 export const usePostStore = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -10,17 +11,16 @@ export const usePostStore = () => {
         setError('');
 
         return new Promise<void>((resolve, reject) => {
-            const waitTime = Math.random() * 800;
-            const errorProbability = 0.1;
+            const waitTime = Math.random() * MAX_DELAY;
             setIsLoading(true);
 
             setTimeout(() => {
                 setIsLoading(false);
-                if (Math.random() < errorProbability) {
+                if (Math.random() < ERROR_PROBABILITY) {
                     setError('Something went wrong when creating new store');
                     reject(error);
                 } else {
-                    addStore(newStore);
+                    addStore({...newStore, id: Math.round(Math.random() * 1e5)});
                     setError('');
                     resolve();
                 }
