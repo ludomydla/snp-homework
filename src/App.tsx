@@ -1,12 +1,12 @@
 import './App.css'
 import { useState } from 'react';
 import type { Store } from './types';
-import Alert from './components/Alert';
-import Spinner from './components/Spinner';
-import StoreCard from './components/StoreCard';
+import Alert from './components/UI/Alert/Alert';
+import Spinner from './components/UI/Spinner/Spinner';
+import StoreCard from './components/StoreCard/StoreCard';
 import { useFetchStoreData } from './hooks/useFetchStoreData';
-import AddNewStoreCard from './components/AddNewStoreCard';
-import Modal from './components/Modal';
+import AddNewStoreCard from './components/AddNewStoreCard/AddNewStoreCard';
+import Modal from './components/UI/Modal/Modal';
 
 
 const MODAL_ID = 'ADD_NEW_STORE';
@@ -32,7 +32,7 @@ function App() {
             <StoreCard store={store} key={indx}/>
           ))}
           <Modal title={'Add new store'} id={MODAL_ID}>
-            Hello
+            
           </Modal>
         </div>
       )}

@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from 'react';
-import { cn, noop } from '../utils';
+import { cn, noop } from '../../../utils';
 import './Button.css';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success';
