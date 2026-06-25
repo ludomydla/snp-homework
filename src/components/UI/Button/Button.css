@@ -6,6 +6,7 @@
     border-style: solid;
     background: transparent;
     margin: .25rem;
+    cursor: pointer;
 }
 
 .button_primary {

@@ -9,10 +9,10 @@ type ButtonProps = ComponentPropsWithoutRef<'button'> & {
     onClick?: () => void;
 }
 
-function Button({children, variant, onClick}: ButtonProps) {
+function Button({children, variant, onClick, ...rest}: ButtonProps) {
 
     return (
-        <button className={cn('button', `button_${variant}`)} onClick={onClick ? onClick : noop}>
+        <button className={cn('button', `button_${variant}`)} onClick={onClick ? onClick : noop} {...rest}>
             {children}
         </button>
     )

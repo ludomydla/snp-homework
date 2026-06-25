@@ -1,0 +1,20 @@
+.input_wrapper {
+    margin: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.input_label {
+    color: white;
+    text-align: left;
+}
+
+.input_input {
+    padding: .5rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    border: 1px solid white;
+    background: #fff3;
+    margin: .25rem 0;
+}

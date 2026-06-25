@@ -1,4 +1,6 @@
-export type StoreType = "google-storage" | "aws-s3" | "adls";
+import type { STORE_TYPE_OPTIONS } from "./constants";
+
+export type StoreType = typeof STORE_TYPE_OPTIONS[number];
 
 export type Store = {
     name: string;
